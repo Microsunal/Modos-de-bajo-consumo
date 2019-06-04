@@ -1,0 +1,155 @@
+*** EVALUATION ***
+PROGRAM "4_1-bajo_consumo_2.abs"
+
+*********************************************************************************************
+TARGET SECTION
+---------------------------------------------------------------------------------------------
+Processor   : Freescale HC08
+Memory Model: SMALL
+File Format : ELF\DWARF 2.0
+Linker      : SmartLinker V-5.0.51 Build 14019, Jan 20 2014
+
+*********************************************************************************************
+FILE SECTION
+---------------------------------------------------------------------------------------------
+main_asm.obj                            Model: SMALL,         Lang: Assembler
+
+*********************************************************************************************
+STARTUP SECTION
+---------------------------------------------------------------------------------------------
+Entry point: 0xE000 (_Startup)
+
+*********************************************************************************************
+SECTION-ALLOCATION SECTION
+Section Name                    Size  Type     From       To       Segment
+---------------------------------------------------------------------------------------------
+.init                            132     R     0xE000     0xE083   ROM
+.stack                            64   R/W      0x100      0x13F   RAM
+.vectSeg0_vect                     2     R     0xFFDA     0xFFDB   .vectSeg0
+.vectSeg1_vect                     2     R     0xFFFA     0xFFFB   .vectSeg1
+.vectSeg2_vect                     2     R     0xFFFE     0xFFFF   .vectSeg2
+
+Summary of section sizes per section type:
+READ_ONLY (R):          8A (dec:      138)
+READ_WRITE (R/W):       40 (dec:       64)
+
+*********************************************************************************************
+VECTOR-ALLOCATION SECTION
+    Address     InitValue   InitFunction
+---------------------------------------------------------------------------------------------
+     0xFFDA        0xE06A   KBI_ISR
+     0xFFFA        0xE075   IRQ_ISR
+     0xFFFE        0xE000   _Startup
+
+*********************************************************************************************
+OBJECT-ALLOCATION SECTION
+     Name               Module                 Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+MODULE:                 -- main_asm.obj --
+- PROCEDURES:
+     _Startup                                  E000       8       8       0   .init       
+     main                                      E000       0       0       0   .init       
+     mainLoop                                  E008       D      13       0   .init       
+     config                                    E015      17      23       2   .init       
+     KBI_Config                                E02C      12      18       1   .init       
+     IRQ_Config                                E03E       A      10       1   .init       
+     debounce                                  E048       2       2       2   .init       
+     db1                                       E04A       3       3       0   .init       
+     db2                                       E04D       3       3       0   .init       
+     db3                                       E050       9       9       0   .init       
+     retardo                                   E059       2       2       2   .init       
+     rt1                                       E05B       3       3       0   .init       
+     rt2                                       E05E       3       3       0   .init       
+     rt3                                       E061       9       9       0   .init       
+     KBI_ISR                                   E06A       B      11       0   .init       
+     IRQ_ISR                                   E075       F      15       0   .init       
+- VARIABLES:
+- LABELS:
+     __SEG_END_SSTACK                           140       0       0       1               
+
+*********************************************************************************************
+MODULE STATISTIC
+  Name                                      Data   Code  Const
+---------------------------------------------------------------------------------------------
+  main_asm.obj                                 0    132      0
+  other                                       64      6      0
+
+*********************************************************************************************
+SECTION USE IN OBJECT-ALLOCATION SECTION
+---------------------------------------------------------------------------------------------
+SECTION: ".init"
+  main _Startup mainLoop config KBI_Config IRQ_Config debounce db1 db2 db3 
+  retardo rt1 rt2 rt3 KBI_ISR IRQ_ISR 
+
+*********************************************************************************************
+OBJECT LIST SORTED BY ADDRESS
+     Name                                      Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+     main                                      E000       0       0       0   .init       
+     _Startup                                  E000       8       8       0   .init       
+     mainLoop                                  E008       D      13       0   .init       
+     config                                    E015      17      23       2   .init       
+     KBI_Config                                E02C      12      18       1   .init       
+     IRQ_Config                                E03E       A      10       1   .init       
+     debounce                                  E048       2       2       2   .init       
+     db1                                       E04A       3       3       0   .init       
+     db2                                       E04D       3       3       0   .init       
+     db3                                       E050       9       9       0   .init       
+     retardo                                   E059       2       2       2   .init       
+     rt1                                       E05B       3       3       0   .init       
+     rt2                                       E05E       3       3       0   .init       
+     rt3                                       E061       9       9       0   .init       
+     KBI_ISR                                   E06A       B      11       0   .init       
+     IRQ_ISR                                   E075       F      15       0   .init       
+
+*********************************************************************************************
+UNUSED-OBJECTS SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+COPYDOWN SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+OBJECT-DEPENDENCIES SECTION
+---------------------------------------------------------------------------------------------
+_Startup                  USES __SEG_END_SSTACK config 
+mainLoop                  USES retardo 
+config                    USES KBI_Config IRQ_Config 
+KBI_ISR                   USES debounce 
+IRQ_ISR                   USES debounce config 
+
+*********************************************************************************************
+DEPENDENCY TREE
+*********************************************************************************************
+ main and _Startup Group
+ | 
+ +- main                
+ |    
+ +- _Startup            
+    | 
+    +- config              
+       | 
+       +- KBI_Config          
+       |    
+       +- IRQ_Config          
+            
+ KBI_ISR             
+ | 
+ +- debounce            
+      
+ IRQ_ISR             
+ | 
+ +- debounce             (see above)
+ |  
+ +- config               (see above)
+    
+*********************************************************************************************
+STATISTIC SECTION
+---------------------------------------------------------------------------------------------
+
+ExeFile:
+--------
+Number of blocks to be downloaded: 4
+Total size of all blocks to be downloaded: 138
+
